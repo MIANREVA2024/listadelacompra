@@ -1,50 +1,69 @@
-let items = ["Orange", "Apple", "Banana"];
+let items = [
+  {
+    name: "orange",
+    bought: false,
+  },
+  {
+    name: "banana",
+    bought: false,
+  },
+  {
+    name: "apple",
+    bought: false,
+  },
+];
 const shopListDOM = document.getElementById("listId");
 
 function printList() {
   shopListDOM.innerHTML = ``;
   for (let index = 0; index < items.length; index++) {
-    shopListDOM.innerHTML += `<li><label><input type="checkbox"/> ${items[index]} </label><span onclick="deleteItemFromList('${items[index]}')" class="item-delete-btn">x</span></li>`;
+    shopListDOM.innerHTML += `<li><label><input type="checkbox"/> ${items[index].name} </label>
+    
+    <span onclick="deleteItemFromList('${items[index].name}')" class="item-delete-btn">x</span></li>`;
   }
 }
 
-function deleteItemFromList(element) {
-  const index = items.indexOf(element);
-  items.splice(index, 1);
-  shopListDOM.innerHTML = ``;
+function deleteItemFromList(itemsName) {
+  items = items.filter((e) => itemsName != e.name);
+
   printList();
 }
 
 function addItemsToList() {
   let newInputDOM = document.getElementById("inputId");
-  const newItem = newInputDOM.value.trim();
+  const newItemName = newInputDOM.value.trim();
   newInputDOM.value = "";
 
-  if (newItem == "") {
+  if (newItemName == "") {
     alert("introduzca caracteres válidos");
     return;
   }
 
-  if (newItem.length >= 26) {
+  if (newItemName.length >= 26) {
     alert("Máximo 25 caracteres");
     return;
   }
 
   for (const element of items) {
-    if (newItem.toLowerCase() == element.toLowerCase()) {
+    if (newItemName.toLowerCase() == element.name.toLowerCase()) {
       alert("No puede estar repetido");
       return;
     }
   }
 
-  const wordList = newItem.split(" ");
+  const wordList = newItemName.split(" ");
   for (let index = 0; index < wordList.length; index++) {
     wordList[index] =
       wordList[index].charAt(0).toUpperCase() +
       wordList[index].slice(1).toLowerCase();
   }
-  items.push(wordList.join(" "));
+  let newItem = {
+    name: wordList.join(" "),
+    bought: false,
+  };
 
+  items.push(newItem);
+  console.log(items);
   printList();
 }
 
