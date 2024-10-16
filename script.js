@@ -4,7 +4,7 @@ const shopListDOM = document.getElementById("listId");
 function printList() {
   shopListDOM.innerHTML = ``;
   for (let index = 0; index < items.length; index++) {
-    shopListDOM.innerHTML += `<li> ${items[index]} <span onclick="deleteItemFromList('${items}')" class="item-delete-btn">x</span> </li>`;
+    shopListDOM.innerHTML += `<li><label><input type="checkbox"/> ${items[index]} </label><span onclick="deleteItemFromList('${items}')" class="item-delete-btn">x</span></li>`;
   }
 }
 
@@ -18,24 +18,24 @@ function addItemsToList() {
   let newInputDOM = document.getElementById("inputId");
   const newItem = newInputDOM.value.trim();
   newInputDOM.value = "";
-  
+
   if (newItem == "") {
     alert("introduzca caracteres válidos");
     return;
   }
-  
+
   if (newItem.length >= 26) {
     alert("Máximo 25 caracteres");
     return;
   }
-  
+
   for (const element of items) {
     if (newItem.toLowerCase() == element.toLowerCase()) {
       alert("No puede estar repetido");
       return;
     }
   }
-  
+
   const wordList = newItem.split(" ");
   for (let index = 0; index < wordList.length; index++) {
     wordList[index] =
@@ -43,7 +43,7 @@ function addItemsToList() {
       wordList[index].slice(1).toLowerCase();
   }
   items.push(wordList.join(" "));
-  
+
   printList();
 }
 
