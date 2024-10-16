@@ -1,16 +1,21 @@
 // Esta lista es la que de debe mostrar en el navegador
 let items = ["Orange", "Apple", "Banana"];
 
+const shopListDOM = document.getElementById("listId");
+
 // Función para pintar la lista en el navegador
 function printList() {
-  const shopListDOM = document.getElementById("listId");
   shopListDOM.innerHTML = ``;
   for (let index = 0; index < items.length; index++) {
-    shopListDOM.innerHTML += `<li> ${items[index]} <span class="item-delete-btn">x</span> </li>`;
+    shopListDOM.innerHTML += `<li> ${items[index]} <span onclick="deleteItemFromList('${items}')" class="item-delete-btn">x</span> </li>`;
   }
 }
 // Función para eliminar un item de la lista
-function deleteItemFromList(item) {}
+function deleteItemFromList(element) {
+  items.splice(element, 1);
+  shopListDOM.innerHTML = ``;
+  printList();
+}
 
 // Función para agregar un item a la lista
 //seleccionamos el input
@@ -34,19 +39,15 @@ function addItemsToList() {
     return;
   }
 
-  //if (items.includes(newItem.filter())) {
-    
-    if (newItem !== '') {
-        if (!items.includes(newItem)) {
-            items.push(newItem);
-            mostrarLista();
-            newItemInput.value = '';
-        } else {
-            alert(`El newItem "${newItem}" ya está en tu lista.`);
-        }
-    alert("Se encontraron valores duplicados");
-    return;
+  // no se repitan los elementos de la lista
+
+  for (const element of items) {
+    if (newItem.toLowerCase() == element.toLowerCase()) {
+      alert("No puede estar repetido");
+      return;
+    }
   }
+
   const wordList = newItem.split(" ");
   for (let index = 0; index < wordList.length; index++) {
     wordList[index] =
