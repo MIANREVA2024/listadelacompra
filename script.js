@@ -4,12 +4,13 @@ const shopListDOM = document.getElementById("listId");
 function printList() {
   shopListDOM.innerHTML = ``;
   for (let index = 0; index < items.length; index++) {
-    shopListDOM.innerHTML += `<li><label><input type="checkbox"/> ${items[index]} </label><span onclick="deleteItemFromList('${items}')" class="item-delete-btn">x</span></li>`;
+    shopListDOM.innerHTML += `<li><label><input type="checkbox"/> ${items[index]} </label><span onclick="deleteItemFromList('${items[index]}')" class="item-delete-btn">x</span></li>`;
   }
 }
 
 function deleteItemFromList(element) {
-  items.splice(element, 1);
+  const index = items.indexOf(element);
+  items.splice(index, 1);
   shopListDOM.innerHTML = ``;
   printList();
 }
