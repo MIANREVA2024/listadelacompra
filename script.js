@@ -1,7 +1,7 @@
 let items = [
   {
     name: "Orange",
-    bought: false,
+    bought: true,
   },
   {
     name: "Banana",
@@ -9,7 +9,7 @@ let items = [
   },
   {
     name: "Apple",
-    bought: true,
+    bought: false,
   },
 ];
 const shopListDOM = document.getElementById("listId");
@@ -19,26 +19,22 @@ function printList() {
   for (let index = 0; index < items.length; index++) {
     shopListDOM.innerHTML += `<li><input id= "check" type="checkbox" ${
       items[index].bought ? "checked" : " "
-    }  onchange ="checkList()" /> ${items[index].name} 
+    }  onchange ="checkList('${items[index].name}')" /> 
+    <span ${items[index].bought ? "class='cross'" : " "}>${
+      items[index].name
+    } </span>
     
     <span onclick="deleteItemFromList('${
       items[index].name
     }')" class="item-delete-btn">x</span></li>`;
   }
 }
-function checkList() {
-  console.log("check");
-  let isCheckedDOM = document.getElementById("check");
-
-  const isChecked = isCheckedDOM.checked;
-
-  for (index of items) {
-    if (isChecked == false) {
-      console.log("es falso");
-      // index.bought == false;
-    } /* else {
-      index.bought == true;
-    }*/
+function checkList(checkName) {
+  console.log(checkName);
+  for (const item of items) {
+    if (item.name == checkName) {
+      item.bought = !item.bought;
+    }
   }
   printList();
 }
