@@ -17,7 +17,7 @@ const shopListDOM = document.getElementById("listId");
 function printList() {
   shopListDOM.innerHTML = ``;
   for (let index = 0; index < items.length; index++) {
-    shopListDOM.innerHTML += `<li><input id= "check" type="checkbox" ${
+    shopListDOM.innerHTML += `<li><input type="checkbox" ${
       items[index].bought ? "checked" : " "
     }  onchange ="checkList('${items[index].name}')" /> 
     <span ${items[index].bought ? "class='cross'" : " "}>${
@@ -30,7 +30,6 @@ function printList() {
   }
 }
 function checkList(checkName) {
-  console.log(checkName);
   for (const item of items) {
     if (item.name == checkName) {
       item.bought = !item.bought;
