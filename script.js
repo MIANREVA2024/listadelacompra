@@ -57,7 +57,7 @@ function deleteItemFromList(itemsName) {
   printList();
 }
 
-function addItemsToList() {
+async function addItemsToList() {
   let newInputDOM = document.getElementById("inputId");
   const newItemName = newInputDOM.value.trim();
   newInputDOM.value = "";
@@ -89,9 +89,17 @@ function addItemsToList() {
     name: wordList.join(" "),
     bought: false,
   };
-
-  items.push(newItem);
-  console.log(items);
+  // post
+  const response = await fetch(
+    "https://6716056f33bc2bfe40bc0567.mockapi.io/items",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newItem),
+    }
+  );
+  const newItemAPI = await response.json();
+  items.push(newItemAPI);
   printList();
 }
 
