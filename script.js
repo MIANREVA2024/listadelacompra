@@ -1,3 +1,5 @@
+import { getItemsFromApi } from "./API-REST.js";
+
 let items = [
   {
     name: "Orange",
@@ -15,14 +17,6 @@ let items = [
     id: "22",
   },
 ];
-
-async function getItemsFromApi() {
-  const response = await fetch(
-    "https://6716056f33bc2bfe40bc0567.mockapi.io/items"
-  );
-  const itemsData = await response.json();
-  return itemsData;
-}
 
 const shopListDOM = document.getElementById("listId");
 
