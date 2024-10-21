@@ -1,4 +1,4 @@
-import { getItemsFromApi } from "./API-REST.js";
+import { getItemsFromApi, createDataApi } from "./API-REST.js";
 
 let items = [
   {
@@ -88,20 +88,6 @@ async function addItemsToList() {
   items.push(newItemApi);
 
   printList();
-}
-
-async function createDataApi(newItem) {
-  const response = await fetch(
-    "https://6716056f33bc2bfe40bc0567.mockapi.io/items",
-    {
-      method: "POST",
-
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newItem),
-    }
-  );
-  const newItemAPI = await response.json();
-  return newItemAPI;
 }
 
 // Función principal - Aquí empieza la aplicación
