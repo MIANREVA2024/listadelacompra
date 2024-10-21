@@ -2,16 +2,28 @@ let items = [
   {
     name: "Orange",
     bought: true,
+    id: "20",
   },
   {
     name: "Banana",
     bought: false,
+    id: "21",
   },
   {
     name: "Apple",
     bought: false,
+    id: "22",
   },
 ];
+
+async function getItemsFromApi() {
+  const response = await fetch(
+    "https://6716056f33bc2bfe40bc0567.mockapi.io/items"
+  );
+  const itemsData = await response.json();
+  return itemsData;
+}
+
 const shopListDOM = document.getElementById("listId");
 
 function printList() {
@@ -29,6 +41,7 @@ function printList() {
     }')" class="item-delete-btn">x</span></li>`;
   }
 }
+
 function checkList(checkName) {
   for (const item of items) {
     if (item.name == checkName) {
@@ -83,9 +96,15 @@ function addItemsToList() {
 }
 
 // Función principal - Aquí empieza la aplicación
-function main() {
+async function main() {
+  items = await getItemsFromApi();
+  console.log(items);
   printList();
 }
 
 // Llamada a la función principal
 main();
+
+window.addItemsToList = addItemsToList;
+window.checkList = checkList;
+window.deleteItemFromList = deleteItemFromList;
