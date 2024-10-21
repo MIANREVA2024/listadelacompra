@@ -83,18 +83,25 @@ async function addItemsToList() {
     name: wordList.join(" "),
     bought: false,
   };
-  // post
+
+  const newItemApi = await createDataApi(newItem);
+  items.push(newItemApi);
+
+  printList();
+}
+
+async function createDataApi(newItem) {
   const response = await fetch(
     "https://6716056f33bc2bfe40bc0567.mockapi.io/items",
     {
       method: "POST",
+
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newItem),
     }
   );
   const newItemAPI = await response.json();
-  items.push(newItemAPI);
-  printList();
+  return newItemAPI;
 }
 
 // Función principal - Aquí empieza la aplicación
