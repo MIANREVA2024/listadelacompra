@@ -31,7 +31,7 @@ function printList() {
     } </span>
     
     <span onclick="deleteItemFromList('${
-      items[index].name
+      items[index].id
     }')" class="item-delete-btn">x</span></li>`;
   }
 }
@@ -45,10 +45,16 @@ function checkList(checkName) {
   printList();
 }
 
-function deleteItemFromList(itemsName) {
-  items = items.filter((e) => itemsName != e.name);
-
+async function deleteItemFromList(itemId) {
+  await deleteDataFromApi(itemId);
+  items = items.filter((e) => itemId != e.id);
   printList();
+}
+
+async function deleteDataFromApi(itemId) {
+  await fetch("https://6716056f33bc2bfe40bc0567.mockapi.io/items/" + itemId, {
+    method: "DELETE",
+  });
 }
 
 async function addItemsToList() {
