@@ -21,3 +21,13 @@ export async function deleteDataFromApi(itemId) {
     method: "DELETE",
   });
 }
+
+export async function editBoughtFromApi(item) {
+  const response = await fetch(baseAPI + "/" + item.id, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(item),
+  });
+}

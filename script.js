@@ -2,6 +2,7 @@ import {
   getItemsFromApi,
   createDataApi,
   deleteDataFromApi,
+  editBoughtFromApi,
 } from "./API-REST.js";
 
 let items = [
@@ -44,6 +45,7 @@ function checkList(checkName) {
   for (const item of items) {
     if (item.name == checkName) {
       item.bought = !item.bought;
+      editBoughtFromApi(item);
     }
   }
   printList();
@@ -97,7 +99,6 @@ async function addItemsToList() {
 // Función principal - Aquí empieza la aplicación
 async function main() {
   items = await getItemsFromApi();
-  console.log(items);
   printList();
 }
 
