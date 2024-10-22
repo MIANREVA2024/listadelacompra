@@ -1,4 +1,8 @@
-import { getItemsFromApi, createDataApi } from "./API-REST.js";
+import {
+  getItemsFromApi,
+  createDataApi,
+  deleteDataFromApi,
+} from "./API-REST.js";
 
 let items = [
   {
@@ -49,12 +53,6 @@ async function deleteItemFromList(itemId) {
   await deleteDataFromApi(itemId);
   items = items.filter((e) => itemId != e.id);
   printList();
-}
-
-async function deleteDataFromApi(itemId) {
-  await fetch("https://6716056f33bc2bfe40bc0567.mockapi.io/items/" + itemId, {
-    method: "DELETE",
-  });
 }
 
 async function addItemsToList() {

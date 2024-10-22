@@ -19,3 +19,9 @@ export async function createDataApi(newItem) {
   const newItemAPI = await response.json();
   return newItemAPI;
 }
+
+export async function deleteDataFromApi(itemId) {
+  await fetch("https://6716056f33bc2bfe40bc0567.mockapi.io/items/" + itemId, {
+    method: "DELETE",
+  });
+}
